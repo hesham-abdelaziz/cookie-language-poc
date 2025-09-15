@@ -1,0 +1,61 @@
+<div class="home-container">
+  <!-- Loading State -->
+  @if (isLoading) {
+
+  <div class="loading-container">
+    <div class="spinner"></div>
+    <p>Loading content...</p>
+  </div>
+  }
+
+  <!-- Error State -->
+  @if (error && !isLoading) {
+  <div class="error-container">
+    <h3>❌ Error</h3>
+    <p>{{ error }}</p>
+  </div>
+
+  }
+
+  <!-- Content Display -->
+  @if (contentSignal() && !isLoading && !error) {
+
+  <div class="content-container">
+    <!-- Main Content Section -->
+    <div class="content-section">
+      <h2>{{ contentSignal()!.content.title }}</h2>
+      <h3 class="subtitle">{{ contentSignal()!.content.subtitle }}</h3>
+      <p class="welcome-message">
+        {{ contentSignal()!.content.welcomeMessage }}
+      </p>
+
+      <div class="language-info">
+        <strong>{{ contentSignal()!.content.currentLanguage }}</strong>
+      </div>
+
+      <p class="instructions">{{ contentSignal()!.content.instructions }}</p>
+
+      <div class="metadata">
+        <small>
+          🕒 Content loaded at: {{ contentSignal()!.timestamp | date : "medium"
+          }}<br />
+          🌐 Language detected from cookie:
+          <code>{{ contentSignal()!.language }}</code>
+        </small>
+      </div>
+    </div>
+
+    <!-- Technical Details -->
+    <div class="technical-section">
+      <h3>🔧 Technical Details</h3>
+      <ul class="tech-list">
+        <li>✅ All API requests use <code>withCredentials: true</code></li>
+        <li>✅ Language preference stored in server-side cookie</li>
+        <li>✅ No language parameters in API calls needed</li>
+        <li>✅ Automatic language context for all endpoints</li>
+        <li>✅ Clean URLs without language prefixes</li>
+      </ul>
+    </div>
+  </div>
+  }
+</div>
