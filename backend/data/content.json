@@ -1,0 +1,45 @@
+{
+  "it": {
+    "title": "Benvenuto nella nostra applicazione",
+    "subtitle": "Dimostratore di gestione delle lingue tramite cookie",
+    "welcomeMessage": "Questa è una dimostrazione di come gestire le lingue usando i cookie del server.",
+    "currentLanguage": "Lingua attuale: Italiano",
+    "instructions": "Seleziona una lingua dal menu a tendina per vedere come il contenuto cambia senza modificare l'URL."
+  },
+  "en": {
+    "title": "Welcome to our application",
+    "subtitle": "Cookie-based language management demonstrator",
+    "welcomeMessage": "This is a demonstration of how to manage languages using server cookies.",
+    "currentLanguage": "Current language: English",
+    "instructions": "Select a language from the dropdown to see how content changes without modifying the URL."
+  },
+  "de": {
+    "title": "Willkommen in unserer Anwendung",
+    "subtitle": "Cookie-basierter Sprachverwaltungs-Demonstrator",
+    "welcomeMessage": "Dies ist eine Demonstration, wie man Sprachen mit Server-Cookies verwaltet.",
+    "currentLanguage": "Aktuelle Sprache: Deutsch",
+    "instructions": "Wählen Sie eine Sprache aus dem Dropdown-Menü, um zu sehen, wie sich der Inhalt ändert, ohne die URL zu ändern."
+  },
+  "fr": {
+    "title": "Bienvenue dans notre application",
+    "subtitle": "Démonstrateur de gestion des langues basé sur les cookies",
+    "welcomeMessage": "Ceci est une démonstration de la gestion des langues utilisant les cookies du serveur.",
+    "currentLanguage": "Langue actuelle: Français",
+    "instructions": "Sélectionnez une langue dans le menu déroulant pour voir comment le contenu change sans modifier l'URL."
+  },
+  "es": {
+    "title": "Bienvenido a nuestra aplicación",
+    "subtitle": "Demostrador de gestión de idiomas basado en cookies",
+    "welcomeMessage": "Esta es una demostración de cómo gestionar idiomas usando cookies del servidor.",
+    "currentLanguage": "Idioma actual: Español",
+    "instructions": "Selecciona un idioma del menú desplegable para ver cómo cambia el contenido sin modificar la URL."
+  },
+  "pt": {
+    "title": "Bem-vindo à nossa aplicação",
+    "subtitle": "Demonstrador de gestão de idiomas baseado em cookies",
+    "welcomeMessage": "Esta é uma demonstração de como gerir idiomas usando cookies do servidor.",
+    "currentLanguage": "Idioma atual: Português",
+    "instructions": "Selecione um idioma do menu dropdown para ver como o conteúdo muda sem modificar a URL."
+  }
+}
+
