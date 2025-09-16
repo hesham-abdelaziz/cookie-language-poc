@@ -1,59 +1,64 @@
 import {
   Component,
   DestroyRef,
+  effect,
   inject,
   signal,
-  WritableSignal,
-} from '@angular/core';
-import { switchMap } from 'rxjs';
+} from "@angular/core";
 import {
   ContentResponse,
   LanguageService,
-} from '../../services/language.service';
-import { takeUntilDestroyed, toObservable } from '@angular/core/rxjs-interop';
-import { DatePipe } from '@angular/common';
+} from "../../services/language.service";
+import { takeUntilDestroyed } from "@angular/core/rxjs-interop";
+import { DatePipe } from "@angular/common";
 
 @Component({
-  selector: 'app-home',
+  selector: "app-home",
   imports: [DatePipe],
-  templateUrl: './home.component.html',
-  styleUrl: './home.component.scss',
+  templateUrl: "./home.component.html",
+  styleUrl: "./home.component.scss",
 })
 export class HomeComponent {
   private readonly langService = inject(LanguageService);
   private readonly destroyRef = inject(DestroyRef);
-  contentSignal: WritableSignal<ContentResponse | null> = signal(null);
-  isLoading = false;
-  error: string | null = null;
+
+  // Signal-based reactive content loading
+  readonly contentSignal = signal<ContentResponse | null>(null);
+  readonly isLoading = signal<boolean>(false);
+  readonly error = signal<string | null>(null);
 
   constructor() {
-    this.fetchContent();
+    this.setupReactiveContent();
   }
 
-  handleContent() {
-    return toObservable(this.langService.getLanguage()).pipe(
-      takeUntilDestroyed(this.destroyRef),
-      switchMap((lang) => this.langService.getContent())
-    );
+  private setupReactiveContent(): void {
+    // React to language changes automatically using effect
+    effect(() => {
+      const currentLang = this.langService.currentLanguage();
+      if (currentLang) {
+        this.loadContentForLanguage(currentLang);
+      }
+    });
   }
 
-  fetchContent() {
-    this.isLoading = true;
-    this.error = null;
-    this.handleContent()
+  private loadContentForLanguage(language: string): void {
+    this.isLoading.set(true);
+    this.error.set(null);
+
+    this.langService
+      .getContent()
       .pipe(takeUntilDestroyed(this.destroyRef))
       .subscribe({
-        next: (res) => {
-          setTimeout(() => {
-            this.contentSignal.set(res);
-            this.isLoading = false;
-          }, 2000);
+        next: (content) => {
+          this.contentSignal.set(content);
+          this.isLoading.set(false);
         },
         error: (error) => {
-          console.error('Error fetching content:', error);
-          this.error =
-            'Failed to load content. Please check if the backend server is running.';
-          this.isLoading = false;
+          console.error("Error fetching content:", error);
+          this.error.set(
+            "Failed to load content. Please check if the backend server is running."
+          );
+          this.isLoading.set(false);
         },
       });
   }

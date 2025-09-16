@@ -1,46 +1,28 @@
 <div class="container">
-  <div class="header">
-    <h1>🌍 Language Cookie POC</h1>
-    <p>Demonstrating server-side cookie language management</p>
-  </div>
-
   <div class="current-lang-info">
     Currently selected:
     <strong
-      >{{ languageNames[currentLanguage] }} ({{ currentLanguage }})</strong
+      >{{ languageNames[currentLanguage()] }} ({{ currentLanguage() }})</strong
     >
   </div>
 
   <div class="language-selector">
     <label for="languageSelect">Select Language:</label>
-    <!-- id="languageSelect" -->
     <select
-      [value]="currentLanguage"
+      [value]="currentLanguage()"
       (change)="onLanguageChange($event)"
-      [disabled]="isChangingLanguage"
+      [disabled]="isChangingLanguage()"
     >
-      @for (lang of supportedLanguages; track $index) {
+      @for (lang of supportedLanguages(); track lang) {
       <option [value]="lang">
         {{ languageNames[lang] }}
       </option>
       }
     </select>
-    @if (isChangingLanguage) {
+    @if (isChangingLanguage()) {
     <span class="loading">Changing language...</span>
     }
   </div>
 
-  <div class="demo-section">
-    <h3>🏠 Main Content Component</h3>
-    <app-home></app-home>
-  </div>
-
-  <div class="footer">
-    <p>
-      This POC demonstrates how language preferences are stored in server
-      cookies<br />
-      and automatically sent with every API request using
-      <code>withCredentials: true</code>
-    </p>
-  </div>
+  <app-home></app-home>
 </div>

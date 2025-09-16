@@ -1,6 +1,6 @@
 <div class="home-container">
   <!-- Loading State -->
-  @if (isLoading) {
+  @if (isLoading()) {
 
   <div class="loading-container">
     <div class="spinner"></div>
@@ -9,16 +9,16 @@
   }
 
   <!-- Error State -->
-  @if (error && !isLoading) {
+  @if (error() && !isLoading()) {
   <div class="error-container">
     <h3>❌ Error</h3>
-    <p>{{ error }}</p>
+    <p>{{ error() }}</p>
   </div>
 
   }
 
   <!-- Content Display -->
-  @if (contentSignal() && !isLoading && !error) {
+  @if (contentSignal() && !isLoading() && !error()) {
 
   <div class="content-container">
     <!-- Main Content Section -->
